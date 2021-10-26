@@ -4,104 +4,111 @@
 }
 
 .h1{
-top: 0px;
-left: 0px;
-width: 100vw;
-height: 100vh;
-/* height: 768px; */
-background: #FFFFFF 0% 0% no-repeat padding-box;
-opacity: 1;
-position: relative;
-/* border: 4px solid blue; */
-
-}
-
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height:200vh;
+    width: 100vw;
+    /* border: 1px solid red; */ 
+ }
 .h2{
-top: 0px;
-left: 0px;
-width: 100%;
-height: 60px;
-background: #A03037 0% 0% no-repeat padding-box;
-opacity: 1;
-position:  absolute ;
-/* border: 4px solid red; */
-display: flex;
-flex-direction: row;
-/* justify-content: center; */
-}
-
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height:5%;
+    /* border:1px solid blue; */
+    background: #A03037 0% 0% no-repeat padding-box;
+ 
+ }
 .h3{
-top: 19px;
-left: 164px;
-width: 31px;
-height: 24px;
-background: transparent url('../image/book1.png') 0% 0% no-repeat padding-box;
-opacity: 1;
-position: relative;
-}
+    margin-left:10%;
+    /* width: 31px; */
+    width: 2%;
+    /* height: 24px; */
+    height:30%;
+    background-image: url('../image/book1.png');
+    /* background: transparent url('img/education.png') 0% 0% no-repeat padding-box; */
+    opacity: 1;
+ 
+ }
 .h4{
-top: 17px;
-left: 201px;
-width: 91px;
-height: 26px;
-text-align: left;
-font: normal normal normal 20px/26px Roboto;
-letter-spacing: 0px;
-color: #FFFFFF;
-text-transform: capitalize;
-opacity: 100;
-position: relative;
-}
-
+    margin-left: 0.8%;
+    width: 6%;
+    height: 33%;
+    text-align: left;
+    font: normal normal normal 20px/26px Roboto;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    opacity: 1;
+ }
 .part2{
-    top: 14px;
-left: 334px;
-width: 490px;
-height: 33px;
-background: #FCFCFC 0% 0% no-repeat padding-box;
-border-radius: 3px;
-opacity: 1;
-position: absolute;
-display: flex;
-flex-direction: row;
-justify-content: flex-start;
-}
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 3%;
+    width: 33%;
+    height: 55%;
+    background: #FCFCFC 0% 0% no-repeat padding-box;
+    border-radius: 3px;
+    opacity: 1;
+    /* border:2px solid black; */
+ }
 #m2{
-margin-top: 1%;
-margin-left: 1%;
-}
-
+    padding-top: 5px;
+    /* background: #9D9D9D 0% 0% no-repeat padding-box; */
+    opacity: 1;
+ }
+ .part23{
+    display: flex;
+    align-items: center;
+    /* border: 1px solid blue; */
+    height:100%;
+    width:96%;
+ }
 .searchBar{
-margin-top: 1.5%;
-left: 4%;
-border: transparent;
-}
+    width:98.5%;
+    height:80%;
+    border:1px solid transparent;
+    /* font: normal normal normal 12px/16px Roboto; */
+    font-size: 20px;
+    letter-spacing: 0px;
+    color: #9D9D9D;
+    opacity: 1;
+ }
 .h6{
-display: flex;
-flex-direction: column;
-}
-.h7{
-top: 17px;
-left: 1164px;
-width: 15px;
-height: 16px;
-background: transparent url('../image/cart.png') 0% 0% no-repeat padding-box;
-opacity: 1;
-position: absolute;
-}
-.h8{
-top: 41px;
-left: 1162px;
-width: 20px;
-height: 13px;
-text-align: left;
-font: normal normal normal 10px/13px Roboto;
-letter-spacing: 0.45px;
-color: #FFFFFF;
-opacity: 1;
-position: absolute;
-}
-
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    width:7%;
+    /* margin-left:5%; */
+    /* border: 1px solid black; */
+ 
+ }
+.cartIcon, .h8{
+    height:50%;
+    width:100%;
+ }
+ .cartIcon{
+    display: flex;
+    justify-content:center;
+    align-items: flex-end;
+    color:white;
+    /* background: #FFFFFF 0% 0% no-repeat padding-box; */
+    opacity: 1;
+ }
+ .h8{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    text-align: left;
+    text-align: left;
+    font: normal normal normal 10px/13px Roboto;
+    letter-spacing: 0.45px;
+    color: #FFFFFF;
+    opacity: 1;
+ }
 .hh7{
     display: flex;
     flex-direction: column;
@@ -110,11 +117,65 @@ position: absolute;
     border:1px solid grey;
     background-color: #FFFFFF;
     position: absolute;
-    margin-left:68%;
-    margin-top: 4%;
+    /* margin-left:68%; */
+    /* margin-top: 5%; */
+    margin-left:75%;
+     margin-top: 5%;
+     z-index: 1;
     display: none;
-    /* border: 4px solid green; */
-}
+ }
+ 
+ .profile, .myorders,.wishlist, .logout{
+    height:33.3%;
+    width:100%;
+    background-color:#FFFFFF;
+    font-size:15px;
+    border: 1px solid transparent;
+    
+ }
+ .user{
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    width:7%;
+    margin-left:23%;
+    /* border: 7px solid brown; */
+    /* position: fixed; */
+    /* top: 10px;
+ left: 1059px;
+ width: 40px;
+ height: 36px;
+ opacity: 1;
+ position: absolute;
+ margin-top: 0.5%; */
+ }
+ .userIcon{
+    color:white;
+    /* background: #FFFFFF 0% 0% no-repeat padding-box; */
+    opacity: 1;
+ }
+ 
+ .userIcon, .userName{
+    height:50%;
+    width:100%;
+ }
+ .userIcon{
+    display: flex;
+    justify-content:center;
+    align-items: flex-end;
+ }
+ 
+ .userName{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    text-align: left;
+    text-align: left;
+    font: normal normal normal 10px/13px Roboto;
+    letter-spacing: 0.45px;
+    color: #FFFFFF;
+    opacity: 1;
+ }
 
 
 .wish01{
@@ -270,57 +331,6 @@ position: absolute;
     margin-top: -4.6%;;
 }
 
-.profile, .myorders,.wishlist, .logout{
-    height:33.3%;
-    width:100%;
-    background-color:#FFFFFF;
-    font-size:15px;
-    border: 1px solid transparent;
-    
-}
-
-.user{
-    /* display: flex;
-    flex-direction: column;
-    height:100%;
-    width:7%;
-    margin-left:14%; */
-    /* border: 1px solid black; */
-    position: fixed;
-    top: 18px;
-left: 1059px;
-width: 40px;
-height: 36px;
-opacity: 1;
-position: absolute;
-}
-.userIcon{
-    color:white;
-    /* background: #FFFFFF 0% 0% no-repeat padding-box; */
-    opacity: 1;
-}
-
-.userIcon, .userName{
-    height:50%;
-    width:100%;
-}
-.userIcon{
-    display: flex;
-    justify-content:center;
-    align-items: flex-end;
-}
-
-.userName{
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    text-align: left;
-    text-align: left;
-    font: normal normal normal 10px/13px Roboto;
-    letter-spacing: 0.45px;
-    color: #FFFFFF;
-    opacity: 1;
-}
 
 .p1{
     top: 79px;
@@ -335,3 +345,204 @@ opacity: 1;
 position: absolute;
 /* border: 4px solid blue; */
 }
+
+@media only screen and (min-width: 768px) and (max-width: 1024px)  {
+    .h1{
+        height:200vh;
+        width: 100vw;
+     }
+     .h2{
+        height:3%;
+     }
+     .h3{
+        /*     border:1px solid green; */
+            height:25px;
+            width:30px;
+            /* margin-left:1%; */
+        }
+        
+        .h4{
+            height:25px;
+            width:100px;
+            /* margin-left:5%; */
+        }
+        
+        /* .part23{
+            display:none;
+        } */
+        .p1{
+           display:none;
+       }
+        /* .searchBar{
+            display:none;
+        } */
+        .part2{
+            display:flex;
+            font-size:10px;
+            width:370px;
+            height: 40px;
+            margin-left:1%;
+        }
+        .user{
+            margin-left:11%;
+        }
+        
+        .user{
+            margin-left:10%;
+        }
+        
+         .wish01{
+             margin-top: 18%;
+             width: 72%;
+             /* border: 3px solid red; */
+             margin-left: -10%;
+         }
+
+         .wishlistContent{
+            margin-top: 10.3%;
+            width: 71.9%;
+            height: 28%;
+            /* border: 3px solid red; */
+            margin-left: -10%;
+         }
+
+        
+
+         .delete01{
+            /* margin-bottom: 20%; */
+            /* border: 3px solid red; */
+            margin-left: 21%;
+            margin-top: -8%;
+         }
+         .shoppingCart221{
+             display: flex;
+             flex-direction: row;
+             justify-content: flex-start;
+         }
+         .shoppingCart{
+            margin-bottom: 2%;
+            /* border: 3px solid purple; */
+            /* display: none; */
+         }
+         .hh7{
+            margin-left: 86%;
+            height: 80px;
+            margin-top: 7%;
+         }
+        
+    
+}
+
+@media only screen and (min-width: 320px) and (max-width: 430px) {
+    /* .h1{
+        height: 240vh;
+    } */
+    
+    .h3{
+        /*     border:3px solid green; */
+            height:25px;
+            width:30px;
+            margin-left:8%;
+        }
+        .h2{
+            height:4%;
+         }
+        .h4{
+            height:25px;
+            width:100px;
+            margin-left:5%;
+        }
+        
+        .part23{
+            display:none;
+        }
+        .searchBar{
+            display:none;
+        }
+        .part2{
+            /* display:flex;
+            font-size:10px;
+            width:80px;
+            margin-left:1%; */
+            display: none;
+        }
+        .h6{
+            margin-left:auto;
+        }
+        
+        .user{
+            margin-left:34%;
+        }
+        .p1{
+            display:none;
+        }
+        .hh7{
+            margin-left: 74%;
+            height: 80px;
+            width: 70px;
+            margin-top: 9%;
+         }
+        .wish01{
+            margin-top: 18%;
+            width: 80%;
+            /* border: 3px solid red; */
+            margin-left: -38%;
+        }
+
+        .wishlistContent{
+           margin-top: 3%;
+           width: 79.9%;
+           height: 28%;
+           /* border: 3px solid red; */
+           margin-left: -38%;
+        }
+
+        .delete01{
+           /* margin-bottom: 20%; */
+           /* border: 3px solid red; */
+           margin-left: 21%;
+           margin-top: -12%;
+        }
+        .shoppingCart221{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            /* border: 3px solid green; */
+            margin-right: 24%;
+        }
+        .shoppingCart{
+           margin-bottom: 2%;
+           /* border: 3px solid purple; */
+           /* display: none; */
+        }
+    }      
+
+    @media only screen and (min-width: 250px) and (max-width: 340px) {
+        .user{
+           margin-left:20%;
+       }
+       .hh7{
+        margin-left: 68%;
+        height: 80px;
+        width: 70px;
+        margin-top: 9%;
+     }
+
+     .wish01{
+        margin-top: 22%;
+        width: 80%;
+        /* border: 3px solid red; */
+        margin-left: -47%;
+    }
+
+    .wishlistContent{
+       margin-top: 3%;
+       width: 79.9%;
+       height: 28%;
+       /* border: 3px solid red; */
+       margin-left: -47%;
+    }
+
+     
+     }
+

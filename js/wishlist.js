@@ -17,6 +17,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
   })
 
+  let wishlist002;
+    let wishlistArray = [];
+   
   requirejs(['../service/userservice.js'], (methods) => {
     methods.get_wishlist_items().then(function (wishItems) {
         console.log(wishItems.data.result)
@@ -33,9 +36,10 @@ window.addEventListener('DOMContentLoaded', function () {
                     <div class="bookPrice01" id="${res.product_id._id}">Rs. ${res.product_id.price}</div>
                     <div class="bookPrice02" id="${res.product_id._id}"> ${res.product_id.price}</div>
                 </div> 
+                <div class ="shoppingCart221">
                 <div class ="shoppingCart" id="${res.product_id._id}"><i class="material-icons" id="${res.product_id._id}">shopping_cart</i></div> 
                 <div class= "delete01" id="${res.product_id._id}"><i class="material-icons" id="${res.product_id._id}">delete</i></div>
-                 
+                </div> 
             </div>
         </div>`
         }).join(' ');
@@ -53,14 +57,92 @@ window.addEventListener('DOMContentLoaded', function () {
           }
 
           console.log(wishlistDelete)
-          requirejs(['../service/userservice.js'], (methods) => {
-              methods.remove_wishlist_item(wishlistDelete).then(function (response10) {
-                  location.reload();
-                  console.log(response10)
-              })
 
-          })
+          let obj12 = JSON.stringify(wishlistDelete);
+         
+          function removemWishlist(url) {
+            return new Promise(function (resolve, reject) {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === xhr.DONE && xhr.status === 200) {
+                        // console.log(xhr.response, xhr.responseXML);
+                        resolve(xhr.response)
+                    }
+                };
+                xhr.open('DELETE', url, true);
+                xhr.setRequestHeader('x-access-token', localStorage.getItem('token'));
+                xhr.setRequestHeader("Content-type", "application/json");
+
+                xhr.onerror = reject;
+                xhr.send(obj12);
+            });
+        }
+        function get(url){
+          return new Promise(function (resolve, reject) {
+              var xhr = new XMLHttpRequest();
+              xhr.onreadystatechange = function () {
+                  if (xhr.readyState === xhr.DONE && xhr.status === 200) {
+                      // console.log(xhr.response, xhr.responseXML);
+                      resolve(xhr.response)
+                  }
+              };
+              xhr.open('GET', url, true);
+              xhr.setRequestHeader('x-access-token', localStorage.getItem('token'));
+              xhr.setRequestHeader("Content-type", "application/json");
+
+              xhr.onerror = reject;
+
+              xhr.send();
+          });
+
+      }
+
+      removemWishlist(`https://new-bookstore-backend.herokuapp.com/bookstore_user/remove_wishlist_item/${wishlistDelete.product_id}`)
+            .then(function (result) {
+               
+                console.log(result);
+
+                get(`https://new-bookstore-backend.herokuapp.com/bookstore_user/get_wishlist_items`)
+                .then(function(wisResult){
+                   wishlist002 = JSON.parse(wisResult);
+                    // console.log(wishlist002);
+                   wishlistArray = wishlist002.result;
+                    console.log(wishlistArray)
+
+
+                    wishlistContent.innerHTML = wishlistArray.map(function(res1){
+                      return `<div class="wishcont" id="${res1.product_id._id}">
+                      <div class="imagecont" id="${res1.product_id._id}"><img src="../image1/Image 11.png" width="100%" height="100%"></div>
+                      <div class="bookDetails" id="${res1.product_id._id}">
+                          <div class="name01" id="${res1.product_id._id}">${res1.product_id.bookName}</div>
+                          <div class="author01" id="${res1.product_id._id}">${res1.product_id.author}</div>
+                          <div class="bookPrice" id="${res1.product_id._id}">
+                              <div class="bookPrice01" id="${res1.product_id._id}">Rs. ${res1.product_id.price}</div>
+                              <div class="bookPrice02" id="${res1.product_id._id}"> ${res1.product_id.price}</div>
+                          </div> 
+                          <div class ="shoppingCart221">
+                          <div class ="shoppingCart" id="${res1.product_id._id}"><i class="material-icons" id="${res1.product_id._id}">shopping_cart</i></div> 
+                          <div class= "delete01" id="${res1.product_id._id}"><i class="material-icons" id="${res1.product_id._id}">delete</i></div>
+                          </div> 
+                      </div>
+                  </div>`
+                    }).join(' ');
+                })
+
+            }).catch(function (error){
+                console.log(error);
+            })
+
+          // requirejs(['../service/userservice.js'], (methods) => {
+          //     methods.remove_wishlist_item(wishlistDelete).then(function (response10) {
+          //         location.reload();
+          //         console.log(response10)
+          //     })
+
+          // })
       })
+
+
 
       $(document).on('click', '.shoppingCart', function () {
         console.log('abc')
