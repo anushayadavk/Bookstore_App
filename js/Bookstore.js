@@ -7,6 +7,7 @@ window.addEventListener('DOMContentLoaded', function(){
     const wishlistab = document.querySelector('.wishlist')
     const cartPage = document.querySelector(".h6")
     
+    
     userdetails.addEventListener('click', function () {
       console.log("user")
       list.style.display = "flex";
