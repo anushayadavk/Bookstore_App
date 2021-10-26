@@ -31,7 +31,7 @@ window.addEventListener('DOMContentLoaded', function(){
   const wishlistab = document.querySelector('.wishlist')
 
 
-   let counter = 1;
+   let counter = 5;
 
    continuee.addEventListener('click', function () {
         OrderSum.style.display = 'none';
@@ -51,68 +51,249 @@ window.addEventListener('DOMContentLoaded', function(){
     })   
 
      let cart01 = [];
-     let cartid;
+     let cart02id;
      let removeBook = "";
+
+    
+    let arrayRe;
+    let l1;
+    let l2;
+    let count1;
+    let count2;
+    
      
-    $(document).on('click', '.counter-plus', function (event) {
-      let cartid = event.target.id
-     counter += 1;
-    //   if (counter > 0){ counter += 1;
+    $(document).on('click', '.plus', function (event) {
+      let cart02id = event.target.id
+    //  counter += 1;/
+
+    l1 = $(`#${cart02id}.display`).html();
+        // console.log(x)
+        l2 = parseInt(l1)
+        // console.log(y);
+        l2 = l2 +1;
+
+      let count = {
+        //  _id: cart02id,
+          quantityToBuy: l2,
+      }
+
+      console.log(count.quantityToBuy);
+
+        let obj11 = JSON.stringify(count);
+      
+        function ajax(url) {
+          return new Promise(function (resolve, reject) {
+              var xhr = new XMLHttpRequest();
+              xhr.onreadystatechange = function () {
+                  if (xhr.readyState === xhr.DONE && xhr.status === 200) {
+                      // console.log(xhr.response, xhr.responseXML);
+                      resolve(xhr.response)
+                  }
+              };
+              xhr.open('PUT', url, true);
+              xhr.setRequestHeader('x-access-token', localStorage.getItem('token'));
+              xhr.setRequestHeader("Content-type", "application/json");
+
+              xhr.onerror = reject;
+
+              xhr.send(obj11);
+          });
+      }
+
+      function ajaxGet(url) {
+        return new Promise(function (resolve, reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === xhr.DONE && xhr.status === 200) {
+                    // console.log(xhr.response, xhr.responseXML);
+                    resolve(xhr.response)
+                }
+            };
+            xhr.open('GET', url, true);
+            xhr.setRequestHeader('x-access-token', localStorage.getItem('token'));
+            xhr.setRequestHeader("Content-type", "application/json");
+
+            xhr.onerror = reject;
+
+            xhr.send();
+        });
+    }
+
+    ajaxGet(`https://new-bookstore-backend.herokuapp.com/bookstore_user/get_cart_items`)
+        .then(function (result) {
+            // console.log(result + "hello");
+            $(`#${cart02id}.display`).html(count1)
+            let Result0 = JSON.parse(result);
+            console.log(result)
+            console.log(Result0)
+            console.log(Result0.result);
+            // console.log(JSON.parse(result)); // Code depending on result
+            arrayRe = Result0.result.filter(function (book) {
+                return book._id == cart02id;
+            })
+
+            bookNum = arrayRe.map(function (book4) {
+                count1 = book4.quantityToBuy
+                console.log(count1)
+                // return `<div class="display" id="${book4._id}">${book4.quantityToBuy}</div>`
+            });
+
+
+
+            console.log(arrayRe)
+            ajax(`https://new-bookstore-backend.herokuapp.com/bookstore_user/cart_item_quantity/${cart02id}`)
+            .then(function (result) {
+            
+                console.log(result);
+                let j = JSON.parse(result);{
+                    console.log(j)
+                }
+
         
-    //   }
+            })
+
+            .catch(function (error) {
+                console.log(error)
+                // An error occurred
+            });
 
 
-      $('.counter-display').html(counter);
+        })
+        .catch(function (error) {
+            console.log(error)
+            // An error occurred
+        });
 
+      // requirejs(['../service/userservice.js'], function (methods) {
+      //     methods.addToCart(count).then(function (response4) {
+      //         console.log(response4)
+      //       //   location.reload();
+
+      //     })
+      // })
+     
+
+  });
+
+  $(document).on('click', '.minus', function (event) {
+      
+        //  counter -= 1;
+         cart02id = event.target.id
+         l1 = $(`#${cart02id}.display`).html();
+         // console.log(x)
+         l2 = parseInt(l2)
+         // console.log(y);
+ 
+         if (l2 > 0) {
+             l2 = l2 - 1;
+         }
+         else if (l2 == 0) {
+             return y;
+         }
+ 
       let count = {
-          _id: cartid,
-          quantityToBuy: counter,
+        //  _id: cart02id,
+          quantityToBuy: l2,
       }
 
-      console.log(count);
+      console.log(count.quantityToBuy);
 
-      requirejs(['../service/userservice.js'], function (methods) {
-          methods.addToCart(count).then(function (response4) {
-              console.log(response4)
-              //location.reload();
 
-          })
-      })
+        let obj11 = JSON.stringify(count);
+        function ajax(url) {
+          return new Promise(function (resolve, reject) {
+              var xhr = new XMLHttpRequest();
+              xhr.onreadystatechange = function () {
+                  if (xhr.readyState === xhr.DONE && xhr.status === 200) {
+                      // console.log(xhr.response, xhr.responseXML);
+                      resolve(xhr.response)
+                  }
+              };
+              xhr.open('PUT', url, true);
+              xhr.setRequestHeader('x-access-token', localStorage.getItem('token'));
+              xhr.setRequestHeader("Content-type", "application/json");
+
+              xhr.onerror = reject;
+
+              xhr.send(obj11);
+          });
+      }
+
+
+      function ajaxGet(url) {
+        return new Promise(function (resolve, reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === xhr.DONE && xhr.status === 200) {
+                    // console.log(xhr.response, xhr.responseXML);
+                    resolve(xhr.response)
+                }
+            };
+            xhr.open('GET', url, true);
+            xhr.setRequestHeader('x-access-token', localStorage.getItem('token'));
+            xhr.setRequestHeader("Content-type", "application/json");
+
+            xhr.onerror = reject;
+
+            xhr.send();
+        });
+    }
+
+    ajax(`https://new-bookstore-backend.herokuapp.com/bookstore_user/cart_item_quantity/${cart02id}`)
+            .then(function (result) {
+                console.log(result);
+
+                ajaxGet(`https://new-bookstore-backend.herokuapp.com/bookstore_user/get_cart_items`)
+                    .then(function (result) {
+                        // console.log(result + "hello");
+                        $(`#${cart02id}.display`).html(count2)
+                        let Result0 = JSON.parse(result);
+                        console.log(Result0.result);
+                        // console.log(Res.result[2].quantityToBuy)
+                        // console.log(JSON.parse(result)); // Code depending on result
+                        arrayRe = Result0.result.filter(function (book) {
+                            return book._id == cart02id;
+                        })
+
+                        console.log(arrayRe)
+                        bookNum2 = arrayRe.map(function (book4) {
+                            console.log(book4.quantityToBuy)
+                            count2 = book4.quantityToBuy 
+
+                            // return `<div class="counter-display" id="${book4._id}">${book4.quantityToBuy}</div>`
+                        });
+
+
+
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                        // An error occurred
+                    });
+
+                // Code depending on result
+            })
+            .catch(function (error) {
+                console.log(error)
+                // An error occurred
+            });
+    
+    
+
+      // requirejs(['../service/userservice.js'], function (methods) {
+      //     methods.addToCart(count).then(function (response4) {
+      //         console.log(response4)
+      //       //   location.reload();
+
+      //     })
+      // })
 
 
   });
 
-  $(document).on('click', '.counter-minus', function (event) {
-      cartid = event.target.id
-         counter -= 1;
 
-        //  if (counter == 0){ 
-        //     return counter;
-        // }
-        // else if(counter > 0){
-        //     counter -= 1;
-        // }
+
   
-      $('.counter-display').html(counter);
-      let count = {
-          _id: cartid,
-          quantityToBuy: counter,
-      }
-
-      console.log(count);
-
-      requirejs(['../service/userservice.js'], function (methods) {
-          methods.addToCart(count).then(function (response4) {
-              console.log(response4)
-            //   location.reload();
-
-          })
-      })
-
-
-  });
-
-
 
     
     requirejs(['../service/userservice.js'], (methods) => {
@@ -129,10 +310,10 @@ window.addEventListener('DOMContentLoaded', function(){
                           <div class="original" id="${cart00._id}"> ${cart00.product_id.price}</div>
                       </div> 
                       <div class="counter11" id="${cart00._id}">
-                      <button class="counter-minus" id="${cart00._id}">-</button>
-                      <div class="counter-display" id="${cart00._id}">${cart00.quantityToBuy}</div>
+                      <button class="minus" id="${cart00._id}">-</button>
+                      <div class="display" id="${cart00._id}">${cart00.quantityToBuy}</div>
                       
-                      <button class="counter-plus" id="${cart00._id}">+</button>
+                      <button class="plus" id="${cart00._id}">+</button>
                       
                       <div class="remove1" id="${cart00._id}">Remove</div>
                     </div>
@@ -143,6 +324,9 @@ window.addEventListener('DOMContentLoaded', function(){
       })
   })
 
+
+let  remove002;
+let cart012 = [];
 
   $(document).on('click', '.book1', function (event) {
         removeBook = event.target.id
@@ -155,13 +339,89 @@ window.addEventListener('DOMContentLoaded', function(){
             }
 
             console.log(removeBok)
-            requirejs(['../service/userservice.js'], (methods) => {
-                methods.cartRemov(removeBok).then(function (response6) {
-                    location.reload();
-                    console.log(response6)
 
+            let obj22 = JSON.stringify(removeBok);
+            function removemCartItem(url) {
+                return new Promise(function (resolve, reject) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === xhr.DONE && xhr.status === 200) {
+                            // console.log(xhr.response, xhr.responseXML);
+                            resolve(xhr.response)
+                        }
+                    };
+                    xhr.open('DELETE', url, true);
+                    xhr.setRequestHeader('x-access-token', localStorage.getItem('token'));
+                    xhr.setRequestHeader("Content-type", "application/json");
+    
+                    xhr.onerror = reject;
+                    xhr.send(obj22);
+                });
+            }
+            function get(url){
+                return new Promise(function (resolve, reject) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === xhr.DONE && xhr.status === 200) {
+                            // console.log(xhr.response, xhr.responseXML);
+                            resolve(xhr.response)
+                        }
+                    };
+                    xhr.open('GET', url, true);
+                    xhr.setRequestHeader('x-access-token', localStorage.getItem('token'));
+                    xhr.setRequestHeader("Content-type", "application/json");
+      
+                    xhr.onerror = reject;
+      
+                    xhr.send();
+                });
+      
+            }
+            removemCartItem(`https://new-bookstore-backend.herokuapp.com/bookstore_user/remove_cart_item/${removeBok.product_id}`)
+            .then(function (result) {
+               
+                console.log(result);
+
+                get(`https://new-bookstore-backend.herokuapp.com/bookstore_user/get_cart_items`)
+                .then(function(removResult){
+                   remove002 = JSON.parse(removResult);
+                    // console.log(wishlist002);
+                    cart012 = remove002.result;
+                    console.log(cart012)
+
+
+                    cart.innerHTML = cart012.map(function (cart0012) {
+                        return `<div class="book1" id="${cart0012._id}">
+                            <div class="book2" id="${cart0012._id}"><img src="/image1/Image 11.png" width="100%" height="100%" id="${cart0012._id}"></div>
+                            <div class="detail1" id="${cart0012._id}"><div class="book3" id="bookName">${cart0012.product_id.bookName}</div>
+                                <div class="author1" id="author">${cart0012.product_id.author}</div>
+                                <div class="price1" id="${cart0012._id}">
+                                    <div class="price11" id="${cart0012._id}">Rs. ${cart0012.product_id.price}</div>
+                                    <div class="original" id="${cart0012._id}"> ${cart0012.product_id.price}</div>
+                                </div> 
+                                <div class="counter11" id="${cart0012._id}">
+                                <button class="minus" id="${cart0012._id}">-</button>
+                                <div class="display" id="${cart0012._id}">${cart0012.quantityToBuy}</div>
+                                
+                                <button class="plus" id="${cart0012._id}">+</button>
+                                
+                                <div class="remove1" id="${cart0012._id}">Remove</div>
+                              </div>
+                           </div>
+                        </div>`
+                    }).join(' ');
                 })
+
+            }).catch(function (error){
+                console.log(error);
             })
+            // requirejs(['../service/userservice.js'], (methods) => {
+            //     methods.cartRemov(removeBok).then(function (response6) {
+            //         location.reload();
+            //         console.log(response6)
+
+            //     })
+            // })
         })
 
 
@@ -237,7 +497,7 @@ window.addEventListener('DOMContentLoaded', function(){
                 })
 
             })
-
+          
             
         })
     })
